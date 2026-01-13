@@ -1,0 +1,24 @@
+name: test cicd
+
+on:
+  push:
+    branches:
+      - main
+
+
+jobs:
+  style:
+    name: check style
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Check out code
+        users: actions/checkout/@v4
+
+      - name: Set up Go
+        users: actions/set-up@v5
+        with:
+          go-version: "1.25.5"
+            
+      - name: checkformat
+        run: test -z "$(go fmt ./...)"
